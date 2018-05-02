@@ -22,6 +22,7 @@ GameObject:
   - component: {fileID: 212578071060561846}
   - component: {fileID: 50633579744666880}
   - component: {fileID: 58240648595064538}
+  - component: {fileID: 114606994555142238}
   m_Layer: 0
   m_Name: BlockMan
   m_TagString: Untagged
@@ -49,7 +50,7 @@ Rigidbody2D:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1390885180314408}
-  m_BodyType: 1
+  m_BodyType: 0
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
@@ -77,6 +78,17 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 2.205
+--- !u!114 &114606994555142238
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1390885180314408}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b85caed9fb0cbf43a5a7965a1d38d94, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!212 &212578071060561846
 SpriteRenderer:
   m_ObjectHideFlags: 1
