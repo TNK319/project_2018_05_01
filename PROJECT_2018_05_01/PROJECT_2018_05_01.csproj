@@ -241,7 +241,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Script\Debug\DEBUG.cs" />
-    <Compile Include="Assets\Script\test\bom.cs" />
+    <Compile Include="Assets\Script\Select\bank.cs" />
+    <Compile Include="Assets\Script\Select\Positioning.cs" />
+    <Compile Include="Assets\Script\test\bullet.cs" />
     <Compile Include="Assets\Script\test\cannon.cs" />
     <Compile Include="Assets\Script\test\Orbitline.cs" />
   </ItemGroup>

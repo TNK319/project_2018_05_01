@@ -3,12 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class cannon : MonoBehaviour {
-    public GameObject touch;
     //弾丸
-    public GameObject BlockMan;
+    public GameObject bullet;
     public GameObject ball;
     //軌道座標登録座標変数
-    Vector3[] line = new Vector3[10];
+    Vector3[] line = new Vector3[15];
     Rigidbody2D rigid;
     //弾丸を飛ばす力
     float maxpower=16.0f;
@@ -18,7 +17,7 @@ public class cannon : MonoBehaviour {
     // Use this for initialization
     void Start () {
         
-        for(int i = 0; i < 10; i++)
+        for(int i = 0; i < line.Length; i++)
         {
             //軌道座標用に球を生成
             Instantiate(ball);
@@ -46,6 +45,7 @@ public class cannon : MonoBehaviour {
                 heighty = 0.0f;
             }
         }
+        //角度制御
         if (heighty/90 < 1.00f)
         {
             powery = maxpower * heighty/90;
@@ -56,30 +56,34 @@ public class cannon : MonoBehaviour {
             powery = maxpower * heighty / 90;
             powerx = maxpower - powery;
             powery = maxpower * (180 - heighty) / 90;
-
         }
+        //デバック用UI
         DEBUG.debuglog("角度",heighty);
         DEBUG.debuglog("縦パワー",powery);
         DEBUG.debuglog("横パワー",powerx);
+        //求めた角度を反映
         gameObject.transform.rotation = Quaternion.Euler(0.0f, 0.0f, heighty);
         //発射
         if (Input.GetMouseButtonDown(0))
         {
+            //弾丸生成座標指定
+            bullet.transform.position = gameObject.transform.position;
             //弾丸生成
-            GameObject bot = Instantiate(BlockMan) as GameObject;
+            GameObject bot = Instantiate(bullet) as GameObject;
             rigid = bot.GetComponent<Rigidbody2D>();
             //飛ばす軌道
             rigid.AddForce(Vector2.right *powerx, ForceMode2D.Impulse);
             rigid.AddForce(Vector2.up *powery, ForceMode2D.Impulse);
         }
         //軌道線座標を演算登録
-        for(int i = 0; i < 10; i++)
+        for(int i = 0; i < line.Length; i++)
         {
             //軌道の玉の間隔
             float interval = i * 0.2f;
             line[i] = GetPos(interval, powerx,powery, 1);
         }
 	}
+    //二つのオブジェクトから角度を求めるメソッド
     private float GetAim(Vector2 p1, Vector2 p2)
     {
         Vector2 a = new Vector2(1, 0);
