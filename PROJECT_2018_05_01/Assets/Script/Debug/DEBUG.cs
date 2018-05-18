@@ -20,6 +20,19 @@ public class DEBUG : MonoBehaviour {
         }
         log += blog + "]\n";
     }
+    public static void debuglog(string a, Vector3[] b)
+    {
+        string blog = "";
+        log += a + ";\n";
+        for (int i = 0; i < b.Length; i++)
+        {
+            blog += "ID[" +i+ "],x:" + b[i].x +
+                               ",y:" + b[i].y +
+                               ",z:" + b[i].z +
+                               "\n";
+        }
+        log += blog + "\n";
+    }
     public static void debuglog(GameObject name)
     {
         if (name == null)

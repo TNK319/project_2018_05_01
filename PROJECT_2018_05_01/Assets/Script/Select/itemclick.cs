@@ -5,12 +5,15 @@ using UnityEngine.UI;
 
 public class itemclick : MonoBehaviour
 {
-    //別のObjectを獲得する
+    public GameObject[] xy = new GameObject[2];//座標登録
     public GameObject []Bank = new GameObject[2];//クリック予定先
     [SerializeField] GameObject holditem;        //運搬用オブジェクト
 
     Vector3 mouse_position; //マウスのポジション
     Vector3 world_position; //マウスポジションをワールド座標に変換する用
+
+    Vector3[] ID = new Vector3[20];
+    int []IDBank = new int [20];
 
     //大きさを獲得する変数
     float bigwidth;     //横の長い幅
@@ -34,6 +37,8 @@ public class itemclick : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+
+        Debug.Log(ID[0]);
         //それぞれのオブジェクトが保有しているオブジェクトから画像を読み取ってUIに反映
         Bank[0].GetComponent<SpriteRenderer>().sprite = Bank[0].GetComponent<bankhold>().bank.GetComponent<SpriteRenderer>().sprite;
         Bank[1].GetComponent<SpriteRenderer>().sprite = Bank[1].GetComponent<bankhold>().bank.GetComponent<SpriteRenderer>().sprite;
@@ -78,31 +83,45 @@ public class itemclick : MonoBehaviour
             Collider2D collition2d = Physics2D.OverlapPoint(world_position);
 
             //コライダーに当たった場合でタグがbankの場合
-            if (collition2d && collition2d.gameObject.tag == "bank")
+            if (collition2d)
             {
-
-                //SpriteRendererを宣言し、略して見やすくする
-                SpriteRenderer bank1 = collition2d.GetComponent<bankhold>().bank.GetComponent<SpriteRenderer>();
-                SpriteRenderer bank2 = Bank[1].GetComponent<bankhold>().bank.GetComponent<SpriteRenderer>();
-
-                //獲得したコライダーがbank2と同じだった場合
-                if (bank1.bounds.size.x == bank2.bounds.size.x)
+                if (collition2d.gameObject.tag == "uibank")
                 {
-                    //クリック先が大きくない
-                    big = false;
-                }
-                else
-                {
-                    //クリック先が大きい
-                    big = true;
+
+
+                    //SpriteRendererを宣言し、略して見やすくする
+                    SpriteRenderer bank1 = collition2d.GetComponent<bankhold>().bank.GetComponent<SpriteRenderer>();
+                    SpriteRenderer bank2 = Bank[1].GetComponent<bankhold>().bank.GetComponent<SpriteRenderer>();
+
+                    //獲得したコライダーがbank2と同じだった場合
+                    if (bank1.bounds.size.x == bank2.bounds.size.x)
+                    {
+                        //クリック先が大きくない
+                        big = false;
+                    }
+                    else
+                    {
+                        //クリック先が大きい
+                        big = true;
+                    }
+
+                    //クリックしてるのでtrue
+                    isClicked = true;
+                    //クリック先の保有してるオブジェクトにアクセスし、オブジェクトをholditemに保有させる
+                    holditem.GetComponent<itemmove>().item = collition2d.GetComponent<bankhold>().bank;
+                    //クリック先の画像を読み込み画像を運搬用のitemholdに反映
+                    holditem.GetComponent<SpriteRenderer>().sprite = collition2d.GetComponent<SpriteRenderer>().sprite;
+
                 }
 
-                //クリックしてるのでtrue
-                isClicked = true;
-                //クリック先の保有してるオブジェクトにアクセスし、オブジェクトをholditemに保有させる
-                holditem.GetComponent<itemmove>().item = collition2d.GetComponent<bankhold>().bank;
-                //クリック先の画像を読み込み画像を運搬用のitemholdに反映
-                holditem.GetComponent<SpriteRenderer>().sprite = collition2d.GetComponent<SpriteRenderer>().sprite;
+                if (collition2d.gameObject.tag == "bank")
+                {
+                    Debug.Log("デストロイ");
+                    int destroyID = collition2d.GetComponent<bank>().IDget();
+                    IDBank[destroyID] = 0;
+                    ID[destroyID] = new Vector3();
+                    Destroy(collition2d.gameObject);
+                }
             }
         }
 
@@ -117,15 +136,29 @@ public class itemclick : MonoBehaviour
         //クリックしなくなった場合
         if (Input.GetMouseButtonUp(0))
         {
-
-            //生成前に運搬用オブジェクトの座標を調整
-            holditem.transform.position = Posotion();
-            //Bankの生成
-            GameObject Bank = Instantiate(holditem);
-            //生成し終わったら画像を消す
+            if (xy[0].transform.position.x < holditem.transform.position.x && holditem.transform.position.x < xy[1].transform.position.x)
+            {
+                Debug.Log("x0," + xy[0].transform.position.x);
+                Debug.Log("x1," + xy[1].transform.position.x);
+                if (xy[0].transform.position.y < holditem.transform.position.y&&holditem.transform.position.y<xy[1].transform.position.y)
+                {
+                    Debug.Log("y0," + xy[0].transform.position.y);
+                    Debug.Log("y1," + xy[1].transform.position.y);
+                    if (holditem.GetComponent<itemmove>().item != null)
+                    {
+                        //生成前に運搬用オブジェクトの座標を調整
+                        holditem.GetComponent<itemmove>().item.transform.position = Posotion();
+                        IDorganize(holditem.GetComponent<itemmove>().item.transform.position);
+                        //Bankの生成
+                        GameObject Bank = Instantiate(holditem.GetComponent<itemmove>().item);
+                    }
+                }
+            }
             holditem.GetComponent<SpriteRenderer>().sprite = null;
+            holditem.GetComponent<itemmove>().item = null;
             isClicked = false;
         }
+        DEBUG.debuglog("IDBank",IDBank);
     }
 
 
@@ -222,4 +255,28 @@ public class itemclick : MonoBehaviour
             return new Vector3(intx * (smallwidth + widthfree), inty * (smallheight + heightfree), 10);
         }
     }
+
+    private void IDorganize(Vector3 pos)
+    {
+        for (int i = 0; i < ID.Length; i++)
+        {
+
+            if (IDBank[i] == 0)
+            {
+
+                if (big)
+                {
+                    IDBank[i] = 2;
+                }
+                else
+                {
+                    IDBank[i] = 1;
+                }
+                ID[i] = pos;
+                holditem.GetComponent<itemmove>().item.GetComponent<bank>().IDset(i);
+                break;
+            }
+        }
+    }
+
 }

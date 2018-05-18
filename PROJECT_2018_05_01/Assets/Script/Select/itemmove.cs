@@ -5,24 +5,17 @@ using UnityEngine.UI;
 
 public class itemmove : MonoBehaviour {
     public GameObject item;
+    public int ID;
     [SerializeField]
     bool start=false;
 
     // Use this for initialization
     void Start () {
-        
+        Debug.Log("ID:"+ID);
 	}
 	
 	// Update is called once per frame
 	void Update () {
-        if (start)
-        {
-            gameObject.GetComponent<SpriteRenderer>().sprite = item.GetComponent<SpriteRenderer>().sprite;
-            start = false;
-        }
+
 	}
-    public void set()
-    {
-        start = true;
-    }
 }

@@ -21,8 +21,8 @@ GameObject:
   - component: {fileID: 4757625537459446}
   - component: {fileID: 212729971885353716}
   - component: {fileID: 50438585428779162}
+  - component: {fileID: 114579649044604560}
   - component: {fileID: 61810186975586820}
-  - component: {fileID: 114325712302857926}
   m_Layer: 0
   m_Name: bank2
   m_TagString: bank
@@ -37,7 +37,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1490358560063890}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -5, y: 0, z: 10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -88,7 +88,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.35, y: 1.36}
   m_EdgeRadius: 0
---- !u!114 &114325712302857926
+--- !u!114 &114579649044604560
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -96,12 +96,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1490358560063890}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5cab63e821093444ebdec33446e828b2, type: 3}
+  m_Script: {fileID: 11500000, guid: ee914b6027df9664098cb1bea30a583c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Bank: {fileID: 1778115494827880, guid: dfe8398f4684ea445b0d64e8db88bb3c, type: 2}
-  cursor: {fileID: 1578963221640458, guid: 71f18a79c49dcc141a3c219e996a421f, type: 2}
-  start: 0
+  ID: 5
 --- !u!212 &212729971885353716
 SpriteRenderer:
   m_ObjectHideFlags: 1
