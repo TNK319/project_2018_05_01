@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class bankhold : MonoBehaviour {
     public GameObject bank;
-
+    public bool king = false;
+    public int bankID;
     // Use this for initialization
     void Start () {
 

@@ -6,6 +6,9 @@ TagManager:
   tags:
   - bank
   - uibank
+  - uiking
+  - king
+  - baikin
   layers:
   - Default
   - TransparentFX

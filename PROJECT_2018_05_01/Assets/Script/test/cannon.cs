@@ -6,13 +6,15 @@ public class cannon : MonoBehaviour {
     //弾丸
     public GameObject bullet;
     public GameObject ball;
+    public GameObject axis;
     //軌道座標登録座標変数
     Vector3[] line = new Vector3[15];
     Rigidbody2D rigid;
     //弾丸を飛ばす力
-    float maxpower=16.0f;
+    float maxpower=20.0f;
     float powerx=0.0f;
     float powery = 0.0f;
+    float heighty;
 
     // Use this for initialization
     void Start () {
@@ -32,18 +34,21 @@ public class cannon : MonoBehaviour {
         Vector3 s_position = Input.mousePosition;
         //マウス座標をワールド座標に変換
         Vector3 w_position = Camera.main.ScreenToWorldPoint(s_position);
-        float heighty=GetAim(transform.position, w_position);
         //大砲の角度の調整
-        if(w_position.y < transform.position.y)
+        if(w_position.y >= axis.transform.position.y)
         {
-            if (w_position.x <= transform.position.x)
+            if(w_position.x >= axis.transform.position.x)
             {
-                heighty = 180.0f;
+                heighty = GetAim(axis.transform.position, w_position);
             }
             else
             {
-                heighty = 0.0f;
+                heighty = 90;
             }
+        }
+        else
+        {
+            heighty = 0;
         }
         //角度制御
         if (heighty/90 < 1.00f)
@@ -62,7 +67,7 @@ public class cannon : MonoBehaviour {
         DEBUG.debuglog("縦パワー",powery);
         DEBUG.debuglog("横パワー",powerx);
         //求めた角度を反映
-        gameObject.transform.rotation = Quaternion.Euler(0.0f, 0.0f, heighty);
+        axis.transform.rotation = Quaternion.Euler(0.0f, 0.0f, heighty);
         //発射
         if (Input.GetMouseButtonDown(0))
         {

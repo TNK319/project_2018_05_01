@@ -5,7 +5,6 @@ using UnityEngine.UI;
 public class DEBUG : MonoBehaviour {
     GameObject debug;
     static string log;
-    bool oc = true;
     public static void debuglog(string a,float b)
     {
         log += a + ":" + b+"\n";
@@ -48,6 +47,18 @@ public class DEBUG : MonoBehaviour {
                 "\ny:" + name.transform.position.y +
                 "\n";
         }
+    }
+    public static void Null(GameObject []name)
+    {
+        string blog = "";
+        for (int i = 0; i < name.Length; i++)
+        {
+            if (name == null)
+                blog += name[i] + "," + "null\n";
+            else
+                blog += name[i] + "," + "exist\n";
+        }
+        log += blog + "\n";
     }
     public static void debuglog(string OJname,GameObject name)
     {

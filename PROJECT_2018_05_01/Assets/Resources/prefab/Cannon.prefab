@@ -35,8 +35,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1797439057124700}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -6.55, y: -2.5, z: 0}
-  m_LocalScale: {x: 0.4, y: 0.4, z: 1}
+  m_LocalPosition: {x: 11.95, y: 0.47, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -52,7 +52,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea24b9cc71edd26479225ad9f1c760f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bullet: {fileID: 0}
+  bullet: {fileID: 1637675211378150, guid: 0c2ce590d27ba9d4da8ecff740b6072c, type: 2}
   ball: {fileID: 1150535460628616, guid: fc72769769c08084ebcddc58b8245c7e, type: 2}
 --- !u!212 &212636964128509508
 SpriteRenderer:
@@ -88,7 +88,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: 21300000, guid: f59206f8217b22c429524c0c06b9801b, type: 3}
+  m_Sprite: {fileID: 21300000, guid: d0fb05feb09de6e4dbce6575f3a57405, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
