@@ -16,6 +16,10 @@ public class cannon : MonoBehaviour {
     float powery = 0.0f;
     float heighty;
 
+    float time=1.0f;
+
+    public bool player;//true:player,false:enemy
+
     // Use this for initialization
     void Start () {
         
@@ -30,26 +34,41 @@ public class cannon : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        //マウスの座標獲得
-        Vector3 s_position = Input.mousePosition;
-        //マウス座標をワールド座標に変換
-        Vector3 w_position = Camera.main.ScreenToWorldPoint(s_position);
-        //大砲の角度の調整
-        if(w_position.y >= axis.transform.position.y)
+        if (player)
         {
-            if(w_position.x >= axis.transform.position.x)
+            //マウスの座標獲得
+            Vector3 s_position = Input.mousePosition;
+            //マウス座標をワールド座標に変換
+            Vector3 w_position = Camera.main.ScreenToWorldPoint(s_position);
+            //大砲の角度の調整
+            //マウスが大砲を超えたら
+            if (w_position.y >= axis.transform.position.y)
             {
-                heighty = GetAim(axis.transform.position, w_position);
+                if (w_position.x >= axis.transform.position.x)
+                {
+                    heighty = GetAim(axis.transform.position, w_position);
+                }
+                else
+                {
+                    heighty = 90;
+                }
             }
             else
             {
-                heighty = 90;
+                heighty = 0;
             }
         }
+        //敵だった場合
         else
         {
-            heighty = 0;
+            time -= Time.deltaTime;
+            if (time <= 0)
+            {
+                time = 1.0f;
+                heighty = 45+90;
+            }
         }
+        
         //角度制御
         if (heighty/90 < 1.00f)
         {
@@ -62,10 +81,6 @@ public class cannon : MonoBehaviour {
             powerx = maxpower - powery;
             powery = maxpower * (180 - heighty) / 90;
         }
-        //デバック用UI
-        DEBUG.debuglog("角度",heighty);
-        DEBUG.debuglog("縦パワー",powery);
-        DEBUG.debuglog("横パワー",powerx);
         //求めた角度を反映
         axis.transform.rotation = Quaternion.Euler(0.0f, 0.0f, heighty);
         //発射

@@ -19,7 +19,7 @@ public class enemyload : MonoBehaviour {
             {
                 GameObject Bank = (GameObject)Resources.Load("prefab/bank" + values[1]);
                 Bank.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Dynamic;
-                Bank.transform.position = new Vector3(float.Parse(values[2]) + 15, float.Parse(values[3]), float.Parse(values[4]));
+                Bank.transform.position = new Vector3(float.Parse(values[2]) + 16, float.Parse(values[3]), float.Parse(values[4]));
                 Instantiate(Bank);
             }
         }
