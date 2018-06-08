@@ -8,6 +8,8 @@ public class bank : MonoBehaviour {
     public float hpmax=10;
     public float damage=0;
     [SerializeField] int ID;
+    bool player;
+    bool enemy;
 	// Use this for initialization
 	void Start () {
 		
@@ -19,6 +21,10 @@ public class bank : MonoBehaviour {
         gameObject.GetComponent<SpriteRenderer>().color = new Vector4(1.0f, damage, damage,1.0f);
         if (hp >= hpmax)
         {
+            if (ID == 3)
+            {
+
+            }
             Destroy(gameObject);
         }
 	}

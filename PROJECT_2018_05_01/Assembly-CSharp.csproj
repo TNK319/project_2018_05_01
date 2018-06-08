@@ -67,6 +67,7 @@
      <Compile Include="Assets\Script\test\enemyload.cs" />
      <Compile Include="Assets\Script\test\Orbitline.cs" />
      <Compile Include="Assets\Script\test\testsave.cs" />
+     <Compile Include="Assets\Script\test\win.cs" />
      <None Include="Assets\Resources\Data\enemy00.txt" />
      <None Include="Assets\Resources\Data\BankData.txt" />
  <Reference Include="UnityEngine.UI">
