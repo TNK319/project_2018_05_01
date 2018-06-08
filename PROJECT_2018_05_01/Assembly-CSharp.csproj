@@ -51,10 +51,25 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\Resources\Data\Bankstatc.cs" />
      <Compile Include="Assets\Script\Debug\DEBUG.cs" />
-     <Compile Include="Assets\Script\test\bom.cs" />
+     <Compile Include="Assets\Script\Select\bank.cs" />
+     <Compile Include="Assets\Script\Select\bankhold.cs" />
+     <Compile Include="Assets\Script\Select\collider.cs" />
+     <Compile Include="Assets\Script\Select\hold.cs" />
+     <Compile Include="Assets\Script\Select\itemclick.cs" />
+     <Compile Include="Assets\Script\Select\itemmove.cs" />
+     <Compile Include="Assets\Script\Select\save.cs" />
+     <Compile Include="Assets\Script\test\baikideth.cs" />
+     <Compile Include="Assets\Script\test\bankload.cs" />
+     <Compile Include="Assets\Script\test\bullet.cs" />
      <Compile Include="Assets\Script\test\cannon.cs" />
+     <Compile Include="Assets\Script\test\enemyload.cs" />
      <Compile Include="Assets\Script\test\Orbitline.cs" />
+     <Compile Include="Assets\Script\test\testsave.cs" />
+     <Compile Include="Assets\Script\test\win.cs" />
+     <None Include="Assets\Resources\Data\enemy00.txt" />
+     <None Include="Assets\Resources\Data\BankData.txt" />
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files/Unity201741f1/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>
