@@ -256,6 +256,7 @@
     <Compile Include="Assets\Script\test\enemyload.cs" />
     <Compile Include="Assets\Script\test\Orbitline.cs" />
     <Compile Include="Assets\Script\test\testsave.cs" />
+    <Compile Include="Assets\Script\test\win.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Resources\Data\BankData.txt" />

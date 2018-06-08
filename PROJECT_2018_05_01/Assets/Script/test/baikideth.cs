@@ -25,5 +25,9 @@ public class baikideth : MonoBehaviour {
             collision.GetComponent<bank>().hp++;
             Destroy(gameObject);
         }
+        if (collision.gameObject.tag == "grond")
+        {
+            Destroy(gameObject);
+        }
     }
 }

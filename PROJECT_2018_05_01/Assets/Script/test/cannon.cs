@@ -11,10 +11,10 @@ public class cannon : MonoBehaviour {
     Vector3[] line = new Vector3[15];
     Rigidbody2D rigid;
     //弾丸を飛ばす力
-    float maxpower=20.0f;
+    float maxpower=25.0f;
     float powerx=0.0f;
     float powery = 0.0f;
-    float heighty;
+    float heighty=125;
 
     float time=1.0f;
 
@@ -62,11 +62,6 @@ public class cannon : MonoBehaviour {
         else
         {
             time -= Time.deltaTime;
-            if (time <= 0)
-            {
-                time = 1.0f;
-                heighty = 45+90;
-            }
         }
         
         //角度制御
@@ -82,27 +77,48 @@ public class cannon : MonoBehaviour {
             powery = maxpower * (180 - heighty) / 90;
         }
         //求めた角度を反映
-        axis.transform.rotation = Quaternion.Euler(0.0f, 0.0f, heighty);
-        //発射
-        if (Input.GetMouseButtonDown(0))
+        if (player)
         {
+            axis.transform.rotation = Quaternion.Euler(0.0f, 0.0f, heighty);
+        }
+        else
+        {
+            axis.transform.rotation = Quaternion.Euler(0.0f, 0.0f, heighty+180);
+        }
+        //発射
+        if (Input.GetMouseButtonDown(0) && player)
+        {
+
             //弾丸生成座標指定
             bullet.transform.position = gameObject.transform.position;
             //弾丸生成
             GameObject bot = Instantiate(bullet) as GameObject;
             rigid = bot.GetComponent<Rigidbody2D>();
             //飛ばす軌道
-            rigid.AddForce(Vector2.right *powerx, ForceMode2D.Impulse);
-            rigid.AddForce(Vector2.up *powery, ForceMode2D.Impulse);
+            rigid.AddForce(Vector2.right * powerx, ForceMode2D.Impulse);
+            rigid.AddForce(Vector2.up * powery, ForceMode2D.Impulse);
+        }
+        else if (!player && time < 0)
+        {
+            time = 1.0f;
+            heighty = 115 + Random.Range(1, 21);
+            //弾丸生成座標指定
+            bullet.transform.position = gameObject.transform.position;
+            //弾丸生成
+            GameObject bot = Instantiate(bullet) as GameObject;
+            rigid = bot.GetComponent<Rigidbody2D>();
+            //飛ばす軌道
+            rigid.AddForce(Vector2.right * powerx, ForceMode2D.Impulse);
+            rigid.AddForce(Vector2.up * powery, ForceMode2D.Impulse);
         }
         //軌道線座標を演算登録
-        for(int i = 0; i < line.Length; i++)
+        for (int i = 0; i < line.Length; i++)
         {
             //軌道の玉の間隔
             float interval = i * 0.2f;
-            line[i] = GetPos(interval, powerx,powery, 1);
+            line[i] = GetPos(interval, powerx, powery, 1);
         }
-	}
+    }
     //二つのオブジェクトから角度を求めるメソッド
     private float GetAim(Vector2 p1, Vector2 p2)
     {
